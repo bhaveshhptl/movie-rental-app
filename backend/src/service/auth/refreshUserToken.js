@@ -1,21 +1,21 @@
+import bcrypt from "bcryptjs";
+import { jsonServerClient } from "../../config/jsonServer.js";
 import {
   generateAccessToken,
   generateRefreshToken,
-  verifyRefreshToken
+  verifyRefreshToken,
 } from "../../utils/jwt.js";
 
-import {
-  hashPassword,
-  comparePassword
-} from "../../utils/password.js";
+export const refreshUserToken = async (refreshToken) => {
+  if (!refreshToken) {
+    throw new Error("Refresh token is required");
+  }
 
-import { jsonServerClient } from "../../config/jsonServer.js";
-
-export const refreshAccessToken = async (refreshToken) => {
   let decoded;
 
   try {
     decoded = verifyRefreshToken(refreshToken);
+    console.log("Decoded refresh token:", decoded);
   } catch (error) {
     throw new Error("Invalid or expired refresh token");
   }
@@ -26,43 +26,37 @@ export const refreshAccessToken = async (refreshToken) => {
     throw new Error("Invalid refresh token");
   }
 
+  // --------------------------------------------------
   // Find the session
+  // --------------------------------------------------
+
   const sessionResponse = await jsonServerClient.get(
     `/sessions/${sid}`
   );
 
   const session = sessionResponse.data;
 
-  if (!session) {
-    throw new Error("Session not found");
+  if (!session || session.userId !== userId) {
+    throw new Error("Invalid session");
   }
 
-  // Verify session belongs to this user
-  if (session.userId !== userId) {
-    throw new Error("Invalid refresh session");
-  }
+  // --------------------------------------------------
+  // Verify refresh token against stored hash
+  // --------------------------------------------------
 
-  // Check revocation
-  if (session.revokedAt) {
-    throw new Error("Session has been revoked");
-  }
-
-  // Check expiration
-  if (new Date(session.expiresAt) <= new Date()) {
-    throw new Error("Refresh session has expired");
-  }
-
-  // Compare supplied token with stored hash
-  const validToken = await comparePassword(
+  const refreshTokenMatches = await bcrypt.compare(
     refreshToken,
-    session.refreshTokenHash
+    session.refreshToken
   );
 
-  if (!validToken) {
+  if (!refreshTokenMatches) {
     throw new Error("Invalid refresh token");
   }
 
-  // Get current user
+  // --------------------------------------------------
+  // Get user
+  // --------------------------------------------------
+
   const userResponse = await jsonServerClient.get(
     `/users/${userId}`
   );
@@ -73,22 +67,30 @@ export const refreshAccessToken = async (refreshToken) => {
     throw new Error("User not found");
   }
 
+  // --------------------------------------------------
   // Generate new tokens
+  // --------------------------------------------------
+
   const newAccessToken = generateAccessToken(user);
+
   const newRefreshToken = generateRefreshToken(user, sid);
 
-  // Hash new refresh token
-  const newRefreshTokenHash =
-    await hashPassword(newRefreshToken);
-
+  // --------------------------------------------------
   // Rotate refresh token
+  // --------------------------------------------------
+
+  const hashedRefreshToken = await bcrypt.hash(
+    newRefreshToken,
+    10
+  );
+
   await jsonServerClient.patch(`/sessions/${sid}`, {
-    refreshTokenHash: newRefreshTokenHash,
-    rotatedAt: new Date().toISOString()
+    refreshToken: hashedRefreshToken,
+    updatedAt: new Date().toISOString(),
   });
 
   return {
     accessToken: newAccessToken,
-    refreshToken: newRefreshToken
+    refreshToken: newRefreshToken,
   };
 };

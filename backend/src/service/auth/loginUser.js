@@ -1,12 +1,16 @@
-import crypto from "crypto";
-import { generateAccessToken, generateRefreshToken } from "../../utils/jwt.js";
-import { hashPassword , comparePassword} from "../../utils/password.js";
+import bcrypt from "bcryptjs";
 import { jsonServerClient } from "../../config/jsonServer.js";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from "../../utils/jwt.js";
 
 export const loginUser = async ({ email, password }) => {
-  const response = await jsonServerClient.get(
-    `/users?email=${encodeURIComponent(email)}`
-  );
+  const response = await jsonServerClient.get("/users", {
+    params: {
+      email,
+    },
+  });
 
   const users = response.data;
 
@@ -16,49 +20,69 @@ export const loginUser = async ({ email, password }) => {
 
   const user = users[0];
 
-  const passwordValid = await comparePassword(
-    password,
-    user.passwordHash
-  );
+  const passwordMatch = await bcrypt.compare(password, user.passwordHash);
 
-  if (!passwordValid) {
+  if (!passwordMatch) {
     throw new Error("Invalid email or password");
   }
 
-  // Create a unique session
-  const sessionId = crypto.randomUUID();
+  // --------------------------------------------------
+  // Remove all existing sessions for this user
+  // --------------------------------------------------
 
-  // Generate tokens
-  const accessToken = generateAccessToken(user);
-  const refreshToken = generateRefreshToken(user, sessionId);
+  const sessionsResponse = await jsonServerClient.get("/sessions", {
+    params: {
+      userId: user.id,
+    },
+  });
 
-  // Hash refresh token before storing it
-  const refreshTokenHash = await hashPassword(refreshToken);
+  const existingSessions = sessionsResponse.data;
 
-  const now = new Date();
-  const expiresAt = new Date(
-    now.getTime() + 30 * 24 * 60 * 60 * 1000
+  await Promise.all(
+    existingSessions.map((session) =>
+      jsonServerClient.delete(`/sessions/${session.id}`)
+    )
   );
 
-  // Store only the HASH of the refresh token
-  await jsonServerClient.post("/sessions", {
-    id: sessionId,
+  // --------------------------------------------------
+  // Create a new session
+  // --------------------------------------------------
+
+  const sessionResponse = await jsonServerClient.post("/sessions", {
     userId: user.id,
-    refreshTokenHash,
-    createdAt: now.toISOString(),
-    expiresAt: expiresAt.toISOString(),
-    rotatedAt: null,
-    revokedAt: null
+    refreshToken: null,
+    createdAt: new Date().toISOString(),
+  });
+
+  const session = sessionResponse.data;
+  
+  // --------------------------------------------------
+  // Generate tokens
+  // --------------------------------------------------
+
+  const accessToken = generateAccessToken(user);
+
+  const refreshToken = generateRefreshToken(user, session.id);
+
+  const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
+
+  // --------------------------------------------------
+  // Store refresh token in session
+  // --------------------------------------------------
+
+  await jsonServerClient.patch(`/sessions/${session.id}`, {
+    refreshToken : hashedRefreshToken,
+    updatedAt: new Date().toISOString(),
   });
 
   return {
-    accessToken,
-    refreshToken,
     user: {
       id: user.id,
       name: user.name,
       email: user.email,
-      role: user.role
-    }
+      role: user.role,
+    },
+    accessToken,
+    refreshToken,
   };
 };

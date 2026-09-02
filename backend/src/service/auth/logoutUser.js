@@ -1,35 +1,34 @@
 import { jsonServerClient } from "../../config/jsonServer.js";
+import { verifyRefreshToken } from "../../utils/jwt.js";
 
 export const logoutUser = async (refreshToken) => {
+  if (!refreshToken) {
+    return;
+  }
+
   let decoded;
 
   try {
     decoded = verifyRefreshToken(refreshToken);
   } catch (error) {
-    throw new Error("Invalid refresh token");
+    // Token is already invalid/expired.
+    // The user's local auth state can still be cleared.
+    return;
   }
 
   const { sid } = decoded;
 
   if (!sid) {
-    throw new Error("Invalid refresh token");
+    return;
   }
 
-  const sessionResponse = await jsonServerClient.get(
-    `/sessions/${sid}`
-  );
-
-  const session = sessionResponse.data;
-
-  if (!session) {
-    throw new Error("Session not found");
+  try {
+    await jsonServerClient.delete(`/sessions/${sid}`);
+  } catch (error) {
+    // Session may already have been removed.
+    // Logout should remain idempotent.
+    if (error.response?.status !== 404) {
+      throw error;
+    }
   }
-
-  await jsonServerClient.patch(`/sessions/${sid}`, {
-    revokedAt: new Date().toISOString()
-  });
-
-  return {
-    success: true
-  };
 };

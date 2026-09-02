@@ -1,94 +1,103 @@
 import {
   Container,
-  Navbar,
   Nav,
-  Button,
-  Dropdown,
+  Navbar,
 } from "react-bootstrap";
 
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+} from "react-router-dom";
 
-function AppNavbar() {
+import {
+  useDispatch,
+  useSelector,
+} from "react-redux";
+
+import {
+  logout,
+} from "../features/auth/authSlice";
+
+function AppNavBar() {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
-  const { user } = useSelector(
-    (state) => state.auth
-  );
+  const user =
+    useSelector(
+      (state) => state.auth.user
+    );
+
+  const handleLogout = async () => {
+    await dispatch(logout());
+
+    navigate("/login", {
+      replace: true,
+    });
+  };
 
   return (
     <Navbar
-      expand="lg"
+      bg="dark"
       variant="dark"
-      className="app-navbar"
+      expand="lg"
+      className="border-bottom border-secondary"
     >
       <Container>
         <Navbar.Brand
-          onClick={() => navigate("/home")}
+          as={Link}
+          to="/home"
           className="fw-bold"
-          style={{ cursor: "pointer" }}
         >
-          🎬 Movie Rental
+          Movie Rental
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="main-navbar" />
+        <Navbar.Toggle
+          aria-controls="main-navbar"
+        />
 
         <Navbar.Collapse id="main-navbar">
           <Nav className="me-auto">
             <Nav.Link
-              onClick={() => navigate("/home")}
+              as={Link}
+              to="/home"
             >
               Movies
             </Nav.Link>
+
+            <Nav.Link
+              as={Link}
+              to="/cart"
+            >
+              Cart
+            </Nav.Link>
+
+            <Nav.Link
+              as={Link}
+              to="/profile"
+            >
+              Profile
+            </Nav.Link>
           </Nav>
 
-          <div className="d-flex align-items-center gap-2">
+          <Nav>
+            {user && (
+              <Navbar.Text className="me-3">
+                {user.name}
+              </Navbar.Text>
+            )}
 
-            <Button
-              variant="outline-light"
-              onClick={() => navigate("/cart")}
+            <Nav.Link
+              onClick={handleLogout}
+              className="text-danger"
             >
-              🛒 Cart
-            </Button>
-
-            <Dropdown align="end">
-              <Dropdown.Toggle
-                variant="danger"
-                id="profile-dropdown"
-              >
-                👤 {user?.name || "Profile"}
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item
-                  onClick={() =>
-                    navigate("/profile")
-                  }
-                >
-                  Profile
-                </Dropdown.Item>
-
-                <Dropdown.Item
-                  onClick={() =>
-                    navigate("/profile")
-                  }
-                >
-                  Rental History
-                </Dropdown.Item>
-
-                <Dropdown.Divider />
-
-                <Dropdown.Item>
-                  Logout
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-
-          </div>
+              Logout
+            </Nav.Link>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
 
-export default AppNavbar;
+export default AppNavBar;
