@@ -1,0 +1,31 @@
+{
+    "name": "rental-movie-app-backend",
+    "version": "1.0.0",
+    "description": "Backend for the Rental Movie App",
+    "main": "src/server.js",
+    "scripts": {
+        "dev": "concurrently \"npm run dev:api\" \"npm run dev:data\"",
+        "dev:api": "nodemon src/server.js",
+        "dev:data": "json-server data/db.json --port 5001",
+        "start": "node src/server.js"
+    },
+    "keywords": [],
+    "author": "Bhavesh Patil",
+    "license": "ISC",
+    "type": "module",
+    "dependencies": {
+        "axios": "^1.19.0",
+        "bcryptjs": "^3.0.3",
+        "cors": "^2.8.6",
+        "crypto": "^1.0.1",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "express-validator": "^7.3.2",
+        "json-server": "^1.0.0-beta.15",
+        "jsonwebtoken": "^9.0.3"
+    },
+    "devDependencies": {
+        "concurrently": "^10.0.4",
+        "nodemon": "^3.1.14"
+    }
+}

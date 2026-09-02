@@ -1,0 +1,441 @@
+{
+  "users": [
+    {
+      "name": "Bhavesh Patil",
+      "email": "patilbhavesh1223@gmail.com",
+      "passwordHash": "$2b$10$8.5zHfObOrkoPFHcUUSqvuvkNakTGJQTMnDo0ST9fydB2aqWc3CT.",
+      "createdAt": "2026-08-02T14:19:51.140Z",
+      "id": "I7-jFAW7bz4",
+      "role": "super_admin"
+    },
+    {
+      "name": "Rahul Kumar",
+      "email": "rahul@example.com",
+      "passwordHash": "$2b$10$R9ENnTjma.p4f58WfZ36kOHwPyUMTm.LkStykG6PpDKKcF06pt3x6",
+      "createdAt": "2026-08-02T14:22:15.050Z",
+      "id": "S4SQkHs_c3U",
+      "role": "admin"
+    },
+    {
+      "name": "Virat Kohli",
+      "email": "viratkohli18@gmail.com",
+      "passwordHash": "$2b$10$2i/w1QB.EcU.xywb1tahquyXka8lRluOzH0Gwv5u.4fw8luVCkTbq",
+      "createdAt": "2026-08-06T07:07:58.455Z",
+      "id": "H7wRHSMVOtw",
+      "role": "user"
+    },
+    {
+      "name": "Pranav",
+      "email": "pranavxp6@gmail.com",
+      "passwordHash": "$2b$10$5sBnhE/H5/isjOq1sohc/.m59x/z/ibMAqHK3Y9V6VWKsvZg6JyDa",
+      "role": "user",
+      "refreshToken": null,
+      "createdAt": "2026-08-30T20:06:49.030Z",
+      "id": "5Lc95Mu48Ho"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "N1neCnnbcQs",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$JfNtCdOkPIOJyHM9hBIHJO.Hh3nSGYKjVMMItc6aOVFmCGU21Cz.S",
+      "createdAt": "2026-08-30T20:18:01.456Z",
+      "expiresAt": "2026-09-29T20:18:01.456Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "W9pyd3MUiU0",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$Hv.5gVI856w9Vs0DtP2s0eWhRVPYX0A54CeniT2xpB7ExuKP7vIwy",
+      "createdAt": "2026-08-31T07:42:59.384Z",
+      "expiresAt": "2026-09-30T07:42:59.384Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "Mr1Adh1u__s",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$8v8YGla8xUs3io2Po6Frv.pkj2KaFO1ijBVqr7ZZHv3WPQ/3K1JYa",
+      "createdAt": "2026-08-31T07:59:36.316Z",
+      "expiresAt": "2026-09-30T07:59:36.316Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "DaSIq6Ij4kY",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$u2jMRNAM6w4bGu91EzQ0seF73oXPzsA8DK02B92ecPI0cYf7FbFx6",
+      "createdAt": "2026-08-31T08:03:15.536Z",
+      "expiresAt": "2026-09-30T08:03:15.536Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "oVvWRvjgsUw",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$4zPSTNFIowFxNnbkpG1x6eGwQy8J3jo7NFtnfWU9b9Lf5/RFynbhq",
+      "createdAt": "2026-08-31T08:07:29.967Z",
+      "expiresAt": "2026-09-30T08:07:29.967Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "rIv3Ef_jo3I",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$egpWaL6lTHhoFFwo7J5qU.Qrr6nXd1wkrkYq/CTTqdKiYwlhkg8MG",
+      "createdAt": "2026-08-31T08:26:19.010Z",
+      "expiresAt": "2026-09-30T08:26:19.010Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "2yV8e_G3OFY",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$lfPTfuuVCqMzrb1Wm9d2f.LluDWkiz.x8VXBvLg2zks4wzE8tEEtO",
+      "createdAt": "2026-08-31T08:26:49.953Z",
+      "expiresAt": "2026-09-30T08:26:49.953Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "c-jgYZiGtkc",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$6lZ3y/YC18imSxyq/J18s.ef1boc4t5QlMWP9eoUytKV4s0QzxXnq",
+      "createdAt": "2026-08-31T08:43:57.655Z",
+      "expiresAt": "2026-09-30T08:43:57.655Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "6JgKlLg1qfM",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$xpfc9ZRqrdwDuYzutzIZXepxjw3C6VpbifwoarEslsYWFHUJgCxTO",
+      "createdAt": "2026-08-31T10:58:41.727Z",
+      "expiresAt": "2026-09-30T10:58:41.727Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "SjcpL56aN_8",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$eWbC06dHo5lA2vQcsqRN4uS3zC5TtuESvb2MX5egqppTjLp6nC6/y",
+      "createdAt": "2026-08-31T11:14:06.550Z",
+      "expiresAt": "2026-09-30T11:14:06.550Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "B1KjM3Tv3D8",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$znXltao/mcHCtThOP1dzJe5u3Co0JnJpeGldaUvjVdfikqdM5zChO",
+      "createdAt": "2026-08-31T11:30:45.220Z",
+      "expiresAt": "2026-09-30T11:30:45.220Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "RBd68i72OWQ",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$NZ9eH08GreOJAeT/SYG0dOkz/UCgFrLiXf0wukb.N5Y2ZiJeWtXXS",
+      "createdAt": "2026-08-31T11:46:31.884Z",
+      "expiresAt": "2026-09-30T11:46:31.884Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "jkF4XRmOilA",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$gultU.hqpk4Ij7kFV/VHwueQNTcTS0fDxZVxQ1UxXwIXYitmYvIWa",
+      "createdAt": "2026-08-31T11:48:36.392Z",
+      "expiresAt": "2026-09-30T11:48:36.392Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    },
+    {
+      "id": "-4g8J-XFfio",
+      "userId": "5Lc95Mu48Ho",
+      "refreshTokenHash": "$2b$10$5iZmdo/SLaCtJwaP87MWmuX2mXewi17GCQMk.jya9ZlOUlRdw1Gly",
+      "createdAt": "2026-08-31T14:54:08.273Z",
+      "expiresAt": "2026-09-30T14:54:08.273Z",
+      "rotatedAt": null,
+      "revokedAt": null
+    }
+  ],
+  "movies": [
+    {
+      "id": "1",
+      "title": "Interstellar",
+      "genre": "Science Fiction",
+      "releaseYear": 2014,
+      "description": "Explorers travel through space searching for a new home for humanity.",
+      "posterUrl": "https://filmartgallery.com/cdn/shop/files/Interstellar-Vintage-Movie-Poster-Original_ab1cfab0.jpg?v=1741773994",
+      "dailyRate": 50,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "2",
+      "title": "Inception",
+      "genre": "Science Fiction",
+      "releaseYear": 2010,
+      "description": "A skilled thief enters dreams to steal and plant ideas.",
+      "posterUrl": "https://tse4.mm.bing.net/th/id/OIP.XF0ORZuqzuXz1QKBw4JN1wHaLj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "dailyRate": 45,
+      "copies": 5,
+      "availableCopies": 4
+    },
+    {
+      "id": "3",
+      "title": "The Dark Knight",
+      "genre": "Action",
+      "releaseYear": 2008,
+      "description": "Batman faces a criminal mastermind who creates chaos in Gotham.",
+      "posterUrl": "https://originalvintagemovieposters.com/wp-content/uploads/2020/03/Dark-Knight-70822-scaled-1383x2048.jpg",
+      "dailyRate": 40,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "4",
+      "title": "The Shawshank Redemption",
+      "genre": "Drama",
+      "releaseYear": 1994,
+      "description": "Two prisoners form a lasting friendship over many years.",
+      "posterUrl": "https://originalvintagemovieposters.com/wp-content/uploads/2013/12/Shawshank-Redemption.jpg",
+      "dailyRate": 35,
+      "copies": 5,
+      "availableCopies": 4
+    },
+    {
+      "id": "5",
+      "title": "The Godfather",
+      "genre": "Crime",
+      "releaseYear": 1972,
+      "description": "The reluctant son of a crime-family leader enters the family business.",
+      "posterUrl": "https://image.tmdb.org/t/p/original/gwWCZlymCwoRT3G3hpk27p744h3.jpg",
+      "dailyRate": 35,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "6",
+      "title": "Parasite",
+      "genre": "Thriller",
+      "releaseYear": 2019,
+      "description": "A struggling family gradually enters the lives of a wealthy household.",
+      "posterUrl": "https://www.originalfilmart.co.uk/cdn/shop/files/parasite_2019_original_film_art.webp?v=1691094392&width=1200",
+      "dailyRate": 50,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "7",
+      "title": "Spirited Away",
+      "genre": "Animation",
+      "releaseYear": 2001,
+      "description": "A young girl enters a mysterious world filled with spirits.",
+      "posterUrl": "https://thumbs.worthpoint.com/zoom/images1/1/0824/20/spirited-away-movie-poster-sided_1_a4253fa2ad8590995e66e6a7bcd59567.jpg",
+      "dailyRate": 40,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "8",
+      "title": "Gladiator",
+      "genre": "Action",
+      "releaseYear": 2000,
+      "description": "A former Roman general fights for justice as a gladiator.",
+      "posterUrl": "https://www.themoviedb.org/t/p/original/ixsPIb7dIiZlrqbV1QVdqA9XWxm.jpg",
+      "dailyRate": 40,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "9",
+      "title": "Titanic",
+      "genre": "Romance",
+      "releaseYear": 1997,
+      "description": "Two passengers from different backgrounds fall in love aboard a ship.",
+      "posterUrl": "https://tse4.mm.bing.net/th/id/OIP.tczeHErX9gHDXPANDJhLDwHaKr?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "dailyRate": 35,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "10",
+      "title": "Jurassic Park",
+      "genre": "Adventure",
+      "releaseYear": 1993,
+      "description": "Visitors struggle to survive inside a park containing cloned dinosaurs.",
+      "posterUrl": "https://collider.com/wp-content/uploads/2019/09/jurassic-park-poster-bottleneck-variant.jpg",
+      "dailyRate": 35,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "11",
+      "title": "The Matrix",
+      "genre": "Science Fiction",
+      "releaseYear": 1999,
+      "description": "A programmer discovers that the world around him is a simulation.",
+      "posterUrl": "https://tse1.mm.bing.net/th/id/OIP.anI7WTQ_RMEyELafc289jAHaKN?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "dailyRate": 40,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "12",
+      "title": "Forrest Gump",
+      "genre": "Drama",
+      "releaseYear": 1994,
+      "description": "A kind-hearted man experiences several important historical events.",
+      "posterUrl": "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/forrest-gump-movie-poster.jpg",
+      "dailyRate": 35,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "13",
+      "title": "Avengers Endgame",
+      "genre": "Action",
+      "releaseYear": 2019,
+      "description": "A group of heroes attempts to reverse a devastating event.",
+      "posterUrl": "https://tse1.mm.bing.net/th/id/OIP.DVYDQX85lQdcPGsSxAd-rgHaKy?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "dailyRate": 55,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "14",
+      "title": "Coco",
+      "genre": "Animation",
+      "releaseYear": 2017,
+      "description": "A young musician journeys through a colorful world of family memories.",
+      "posterUrl": "https://tse3.mm.bing.net/th/id/OIP.YvIK6BQjAK0teZUnGFDifgHaK-?w=202&h=300&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+      "dailyRate": 40,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "15",
+      "title": "A Quiet Place",
+      "genre": "Horror",
+      "releaseYear": 2018,
+      "description": "A family must remain silent to survive creatures that hunt by sound.",
+      "posterUrl": "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/08/a-quiet-place-franchise-poster.jpg",
+      "dailyRate": 45,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "16",
+      "title": "La La Land",
+      "genre": "Musical",
+      "releaseYear": 2016,
+      "description": "An actor and a musician pursue their ambitions in Los Angeles.",
+      "posterUrl": "https://tse4.mm.bing.net/th/id/OIP._Zcj4UBObxjkKyYc9pAUQAHaK_?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "dailyRate": 40,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "17",
+      "title": "Knives Out",
+      "genre": "Mystery",
+      "releaseYear": 2019,
+      "description": "A detective investigates the suspicious death of a wealthy novelist.",
+      "posterUrl": "https://image.tmdb.org/t/p/original/pThyQovXQrw2m0s9x82twj48Jq4.jpg",
+      "dailyRate": 45,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "18",
+      "title": "Dune",
+      "genre": "Science Fiction",
+      "releaseYear": 2021,
+      "description": "A young noble travels to a dangerous desert planet.",
+      "posterUrl": "https://filmartgallery.com/cdn/shop/files/Dune-Part-Two-Vintage-Movie-Poster-Original-1-Sheet-27x41.jpg?v=1710903897",
+      "dailyRate": 55,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "19",
+      "title": "Top Gun Maverick",
+      "genre": "Action",
+      "releaseYear": 2022,
+      "description": "An experienced pilot trains a new group for a difficult mission.",
+      "posterUrl": "https://i.etsystatic.com/10683147/r/il/a6a7ac/4181629488/il_1080xN.4181629488_cap4.jpg",
+      "dailyRate": 55,
+      "copies": 5,
+      "availableCopies": 5
+    },
+    {
+      "id": "20",
+      "title": "The Pursuit of Happyness",
+      "genre": "Drama",
+      "releaseYear": 2006,
+      "description": "A struggling father works toward a better future for his son.",
+      "posterUrl": "https://tse3.mm.bing.net/th/id/OIP.aPnCrQ3fzhLCkw-lUZNQMAHaLA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "dailyRate": 35,
+      "copies": 5,
+      "availableCopies": 5
+    }
+  ],
+  "carts": [
+    {
+      "userId": "H7wRHSMVOtw",
+      "items": [],
+      "id": "o_3BRg5l4Vc"
+    },
+    {
+      "userId": "5Lc95Mu48Ho",
+      "items": [
+        {
+          "movieId": "14",
+          "rentalDays": 1
+        }
+      ],
+      "id": "5aC6MbD_stI"
+    }
+  ],
+  "rentals": [
+    {
+      "userId": "H7wRHSMVOtw",
+      "items": [
+        {
+          "movieId": "4",
+          "movieTitle": "The Shawshank Redemption",
+          "rentalDays": 3,
+          "dailyRate": 35,
+          "lineTotal": 105,
+          "dueDate": "2026-08-09T12:53:34.475Z"
+        }
+      ],
+      "totalCost": 105,
+      "rentalDate": "2026-08-06T12:53:34.474Z",
+      "status": "active",
+      "id": "SgJvJexVgDc"
+    },
+    {
+      "userId": "5Lc95Mu48Ho",
+      "items": [
+        {
+          "movieId": "2",
+          "movieTitle": "Inception",
+          "rentalDays": 4,
+          "dailyRate": 45,
+          "lineTotal": 180,
+          "dueDate": "2026-09-04T11:46:36.855Z"
+        }
+      ],
+      "totalCost": 180,
+      "rentalDate": "2026-08-31T11:46:36.855Z",
+      "status": "active",
+      "id": "Rjk65ytGybQ"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
