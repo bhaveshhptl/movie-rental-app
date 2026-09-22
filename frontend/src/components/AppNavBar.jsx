@@ -65,12 +65,12 @@ function AppNavBar() {
               Movies
             </Nav.Link>
 
-            <Nav.Link
+            {user?.role !== "admin" && <Nav.Link
               as={Link}
               to="/cart"
             >
               Cart
-            </Nav.Link>
+            </Nav.Link>}
 
             <Nav.Link
               as={Link}
@@ -78,6 +78,16 @@ function AppNavBar() {
             >
               Profile
             </Nav.Link>
+
+            {(user?.role === "admin" ||
+              user?.role === "super_admin") && (
+                <Nav.Link
+                  as={Link}
+                  to="/admin"
+                >
+                  Admin
+                </Nav.Link>
+              )}
           </Nav>
 
           <Nav>

@@ -7,7 +7,8 @@
         "dev": "concurrently \"npm run dev:api\" \"npm run dev:data\"",
         "dev:api": "nodemon src/server.js",
         "dev:data": "json-server data/db.json --port 5001",
-        "start": "node src/server.js"
+        "start": "node src/server.js",
+        "seed": "node seedDB.js"
     },
     "keywords": [],
     "author": "Bhavesh Patil",

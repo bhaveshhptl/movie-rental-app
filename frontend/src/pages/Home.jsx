@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import {
   Container,
-  Alert,
 } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchMovies,
 } from "../features/movies/movieSlice";
+import { fetchRentalHistory } from "../features/rental/rentalSlice";
 
 import MovieGrid from "../components/MovieGrid";
 import MovieFilters from "../components/MovieFilters";
@@ -26,6 +26,7 @@ function Home() {
     loading,
     error,
   } = useSelector((state) => state.movies);
+  const user = useSelector((state) => state.auth.user);
 
   const [search, setSearch] = useState("");
 
@@ -41,6 +42,12 @@ function Home() {
       })
     );
   }, [dispatch]);
+
+  useEffect(() => {
+    if (user?.role !== "admin") {
+      dispatch(fetchRentalHistory());
+    }
+  }, [dispatch, user?.role]);
 
   const handleSearchChange = (value) => {
     setSearch(value);
@@ -91,7 +98,7 @@ function Home() {
     <Container className="py-4">
 
       {/* Hero Carousel */}
-      <MovieCarousel movies={movies} />
+      <MovieCarousel movies={movies} canRent={user?.role !== "admin"} />
 
       {/* Page heading */}
       <div className="mb-4">

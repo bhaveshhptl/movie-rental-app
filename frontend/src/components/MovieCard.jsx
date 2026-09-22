@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import {
   addMovieToCart,
@@ -17,6 +18,14 @@ function MovieCard({ movie }) {
   const [addedToCart, setAddedToCart] = useState(false);
   const [addingToCart, setAddingToCart] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const rentals = useSelector((state) => state.rental.rentals);
+  const isAdminBrowse = user?.role === "admin";
+  const hasActiveRental = rentals.some(
+    (rental) => rental.status !== "returned" &&
+      (rental.items || []).some((item) => String(item.movieId) === String(movie.id))
+  );
 
   const [rentalDays, setRentalDays] =
     useState(1);
@@ -26,6 +35,10 @@ function MovieCard({ movie }) {
   );
 
   const handleAddToCart = async () => {
+    if (hasActiveRental) {
+      window.alert("This movie is already in your active rentals.");
+      return;
+    }
     setAddingToCart(true);
 
     const result = await dispatch(
@@ -47,7 +60,12 @@ function MovieCard({ movie }) {
   };
 
   return (
-    <Card className="h-100 bg-dark text-white border-secondary movie-card">
+    <Card
+      className="h-100 bg-dark text-white border-secondary movie-card"
+      role="button"
+      onClick={() => navigate(`/movies/${movie.id}`)}
+      style={{ cursor: "pointer" }}
+    >
       <Card.Img
         variant="top"
         src={movie.posterUrl}
@@ -68,7 +86,7 @@ function MovieCard({ movie }) {
           {movie.description}
         </Card.Text>
 
-        <div className="mt-auto">
+        {!isAdminBrowse && <div className="mt-auto" onClick={(event) => event.stopPropagation()}>
 
           <div className="mb-2">
             <strong>
@@ -112,19 +130,22 @@ function MovieCard({ movie }) {
             onClick={handleAddToCart}
             disabled={
               addingToCart ||
-              movie.availableCopies <= 0
+              movie.availableCopies <= 0 ||
+              hasActiveRental
             }
           >
             {addingToCart
               ? "Adding..."
               : addedToCart
                 ? "✓ Added to Cart"
+                : hasActiveRental
+                  ? "Already Rented"
                 : movie.availableCopies <= 0
                   ? "Unavailable"
                   : "Add to Cart"}
           </Button>
 
-        </div>
+        </div>}
       </Card.Body>
     </Card>
   );

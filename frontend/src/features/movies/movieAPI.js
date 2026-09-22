@@ -21,3 +21,8 @@ export const getMovies = async ({
 
   return response.data;
 };
+
+export const getMovie = async (movieId) => {
+  const response = await api.get(`/movies/${movieId}`);
+  return response.data.movie;
+};

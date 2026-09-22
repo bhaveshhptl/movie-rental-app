@@ -13,7 +13,7 @@ export const deleteMovie = async (req, res) => {
       message: "Movie deleted successfully"
     });
   } catch (error) {
-    if (error.response?.status === 404) {
+    if (error.statusCode === 404) {
       return res.status(404).json({ success: false, message: "Movie not found" });
     }
     console.error("Error deleting movie:", error.message);

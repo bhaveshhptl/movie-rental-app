@@ -31,7 +31,30 @@ app.use("/api/auth", authRouter);
 app.use("/api/movies", movieRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/rentals", rentalRouter);
-app.use("/api/admin", adminRouter)
+app.use("/api/admin", adminRouter);
+
+// =====================================================
+// GLOBAL ERROR HANDLER
+// =====================================================
+
+app.use((error, req, res, next) => {
+  console.error(
+    `${req.method} ${req.originalUrl}`,
+    error
+  );
+
+  const statusCode =
+    error.statusCode || 500;
+
+  return res.status(statusCode).json({
+    success: false,
+    message:
+      statusCode === 500
+        ? "Internal Server Error"
+        : error.message
+  });
+});
+
 
 export { app };
 

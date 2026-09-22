@@ -1,27 +1,41 @@
 import * as adminService from "../../service/admin/index.js";
 
-export const imposePenalty = async (req, res) => {
+export const imposePenalty = async (
+  req,
+  res,
+  next
+) => {
   try {
     const { rentalId } = req.params;
-    const { penaltyAmount } = req.body;
+    const { penaltyPerDay, movieId } = req.body;
 
-    if (!penaltyAmount || penaltyAmount <= 0) {
+    if (
+      penaltyPerDay === undefined ||
+      penaltyPerDay === null ||
+      Number(penaltyPerDay) <= 0 ||
+      !movieId
+    ) {
       return res.status(400).json({
         success: false,
-        message: "Valid penalty amount is required"
+        message:
+            "A movie ID and valid per-day penalty are required"
       });
     }
 
-    const updatedRental = await adminService.imposePenalty(rentalId, penaltyAmount);
+    const updatedRental =
+      await adminService.imposePenalty(
+        rentalId,
+        penaltyPerDay,
+        movieId
+      );
+
     return res.status(200).json({
       success: true,
-      message: "Penalty applied successfully",
+      message:
+        "Penalty applied successfully",
       rental: updatedRental
     });
   } catch (error) {
-    return res.status(error.statusCode || 500).json({
-      success: false,
-      message: error.message
-    });
+    next(error);
   }
 };

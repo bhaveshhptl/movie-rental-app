@@ -1,12 +1,15 @@
 import express from "express";
 
 import {
-    viewAllUsers,
-    viewOverdueRentals,
-    viewDailyTransactions,
-    imposePenalty,
-    makeAdmin,
-    removeAdmin
+  viewAllUsers,
+  viewAllRentals,
+  viewOverdueRentals,
+  viewActiveMovies,
+  viewDailyTransactions,
+  imposePenalty,
+  markRentalReturned,
+  makeAdmin,
+  removeAdmin
 } from "../controllers/admin/index.js";
 
 import { authenticate } from "../middleware/authenticate.js";
@@ -35,6 +38,11 @@ adminRouter.get(
 );
 
 adminRouter.get(
+    "/rentals/active",
+    viewActiveMovies
+);
+
+adminRouter.get(
     "/transactions/daily",
     viewDailyTransactions
 );
@@ -42,6 +50,16 @@ adminRouter.get(
 adminRouter.post(
     "/rentals/:rentalId/penalty",
     imposePenalty
+);
+
+adminRouter.get(
+  "/rentals",
+  viewAllRentals
+);
+
+adminRouter.patch(
+  "/rentals/:rentalId/return",
+  markRentalReturned
 );
 
 // ==========================================

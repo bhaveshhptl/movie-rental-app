@@ -22,6 +22,9 @@ export const createMovie = async (req, res) => {
       movie: createdMovie
     });
   } catch (error) {
+    if (error.statusCode) {
+      return res.status(error.statusCode).json({ success: false, message: error.message });
+    }
     console.error("Error creating movie:", error.message);
     return res.status(500).json({ success: false, message: "Unable to create movie" });
   }

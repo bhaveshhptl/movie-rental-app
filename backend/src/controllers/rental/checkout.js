@@ -12,8 +12,8 @@ export const checkout = async (req, res) => {
         });
 
     } catch (error) {
-        if (error.status) {
-            return res.status(error.status).json({
+        if (error.statusCode) {
+            return res.status(error.statusCode).json({
                 success: false,
                 message: error.message
             });

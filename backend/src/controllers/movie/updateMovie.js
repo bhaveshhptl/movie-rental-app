@@ -14,8 +14,11 @@ export const updateMovie = async (req, res) => {
       movie: updatedMovie
     });
   } catch (error) {
-    if (error.response?.status === 404) {
+    if (error.statusCode === 404) {
       return res.status(404).json({ success: false, message: "Movie not found" });
+    }
+    if (error.statusCode) {
+      return res.status(error.statusCode).json({ success: false, message: error.message });
     }
     console.error("Error updating movie:", error.message);
     return res.status(500).json({ success: false, message: "Unable to update movie" });

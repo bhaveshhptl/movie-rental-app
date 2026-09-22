@@ -2,8 +2,12 @@ import {
   Carousel,
   Button,
 } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function MovieCarousel({ movies }) {
+function MovieCarousel({ movies, canRent = true }) {
+  const navigate = useNavigate();
+  const rentals = useSelector((state) => state.rental.rentals);
   const carouselMovies = movies.slice(0, 4);
 
   if (carouselMovies.length === 0) {
@@ -16,7 +20,11 @@ function MovieCarousel({ movies }) {
       interval={4000}
     >
       {carouselMovies.map((movie) => (
-        <Carousel.Item key={movie.id}>
+        <Carousel.Item
+          key={movie.id}
+          onClick={() => navigate(`/movies/${movie.id}`)}
+          style={{ cursor: "pointer" }}
+        >
           <img
             src={movie.posterUrl}
             alt={movie.title}
@@ -32,9 +40,23 @@ function MovieCarousel({ movies }) {
               {movie.description}
             </p>
 
-            <Button variant="danger">
+            {canRent && <Button
+              variant="danger"
+              onClick={(event) => {
+                event.stopPropagation();
+                const alreadyRented = rentals.some(
+                  (rental) => rental.status !== "returned" &&
+                    (rental.items || []).some((item) => String(item.movieId) === String(movie.id))
+                );
+                if (alreadyRented) {
+                  window.alert("This movie is already in your active rentals.");
+                  return;
+                }
+                navigate("/cart");
+              }}
+            >
               Rent Now
-            </Button>
+            </Button>}
           </Carousel.Caption>
         </Carousel.Item>
       ))}

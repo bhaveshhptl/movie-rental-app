@@ -23,6 +23,17 @@ export const checkoutService = async (userId) => {
     const moviesResponse =
         await jsonServerClient.get("/movies");
 
+    const rentalsResponse = await jsonServerClient.get(
+        `/rentals?userId=${encodeURIComponent(userId)}`
+    );
+
+    const activeMovieIds = new Set(
+        rentalsResponse.data
+            .filter((rental) => rental.status !== "returned")
+            .flatMap((rental) => rental.items || [])
+            .map((item) => String(item.movieId))
+    );
+
     const moviesMap = new Map(
         moviesResponse.data.map((movie) => [
             String(movie.id),
@@ -51,6 +62,16 @@ export const checkoutService = async (userId) => {
             );
 
             error.statusCode = 404;
+
+            throw error;
+        }
+
+        if (activeMovieIds.has(String(item.movieId))) {
+            const error = new Error(
+                `${movie.title} already has an active rental for this user.`
+            );
+
+            error.statusCode = 409;
 
             throw error;
         }

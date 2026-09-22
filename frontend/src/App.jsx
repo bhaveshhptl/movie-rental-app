@@ -27,6 +27,10 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminMovies from "./pages/AdminMovies";
+import MovieDetails from "./pages/MovieDetails";
+import AdminRoute from "./routes/AdminRoute";
 
 function AuthInitializer() {
   const dispatch = useDispatch();
@@ -130,6 +134,11 @@ function App() {
         />
 
         <Route
+          path="/movies/:movieId"
+          element={<MovieDetails />}
+        />
+
+        <Route
           path="/cart"
           element={<Cart />}
         />
@@ -138,6 +147,17 @@ function App() {
           path="/profile"
           element={<Profile />}
         />
+
+        <Route element={<AdminRoute />}>
+          <Route
+            path="/admin"
+            element={<AdminDashboard />}
+          />
+          <Route
+            path="/admin/movies"
+            element={<AdminMovies />}
+          />
+        </Route>
       </Routes>
     </>
   );
